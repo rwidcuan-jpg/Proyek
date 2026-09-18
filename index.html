@@ -64,15 +64,19 @@
                 <a href="#panduan" class="nav-link">
                     Panduan
                 </a>
-
+                <a href="#informasi" class="nav-link">
+                    Informasi
+                </a>
                 <a href="#tentang" class="nav-link">
                     Tentang
                 </a>
+
 
                 <a href="#layanan" class="nav-button">
                     Akses Layanan
                     <span>→</span>
                 </a>
+
 
             </nav>
 
@@ -90,21 +94,6 @@
 
     </header>
 
-    <!-- NAVBAR -->
-    <header>
-
-        <div class="logo">
-            KEMENAG
-        </div>
-
-        <nav>
-            <a href="#beranda">Beranda</a>
-            <a href="#layanan">Layanan</a>
-            <a href="#panduan">Panduan</a>
-            <a href="#kontak">Kontak</a>
-        </nav>
-
-    </header>
 
 
     <!-- HALAMAN UTAMA -->
@@ -272,17 +261,88 @@
 
                 </div>
 
-                <div class="service-filter">
+
+                <div class="service-filters">
                     <button class="filter-btn active" data-filter="all">Semua</button>
                     <button class="filter-btn" data-filter="kepegawaian">Kepegawaian</button>
                     <button class="filter-btn" data-filter="absensi">Absensi</button>
-                    <button class="filter-btn" data-filter="pendidikan">Pendidikan</button>
-                    <button class="filter-btn" data-filter="administrasi">Administrasi</button>
+                    <button class="filter-btn" data-filter="sistem">Sistem</button>
+                    <button class="filter-btn" data-filter="form">Form Digital</button>
                 </div>
+                <div class="popular-services">
 
+                    <div class="popular-header">
+                        <div>
+                            <span class="section-badge">AKSES CEPAT</span>
+                            <h3>Layanan Populer</h3>
+                            <p>Layanan yang sering dibutuhkan dalam aktivitas kepegawaian.</p>
+                        </div>
+                    </div>
+
+                    <div class="popular-grid">
+
+                        <a href="https://hrms.kemenag.go.id/presensi" target="_blank" class="popular-card">
+
+                            <div class="popular-icon">🕘</div>
+
+                            <div class="popular-info">
+                                <strong>Presensi ASN</strong>
+                                <span>Akses presensi pegawai</span>
+                            </div>
+
+                            <span class="popular-arrow">→</span>
+
+                        </a>
+
+
+                        <a href="https://pusaka-v3.kemenag.go.id/" target="_blank" class="popular-card">
+
+                            <div class="popular-icon">📱</div>
+
+                            <div class="popular-info">
+                                <strong>Absensi Pusaka</strong>
+                                <span>Absensi melalui Pusaka Kemenag</span>
+                            </div>
+
+                            <span class="popular-arrow">→</span>
+
+                        </a>
+
+
+                        <a href="https://simpeg5.kemenag.go.id/" target="_blank" class="popular-card">
+
+                            <div class="popular-icon">💻</div>
+
+                            <div class="popular-info">
+                                <strong>SIMSDM / SIMPEG</strong>
+                                <span>Sistem informasi kepegawaian</span>
+                            </div>
+
+                            <span class="popular-arrow">→</span>
+
+                        </a>
+
+
+                        <a href="https://hrms.kemenag.go.id/kgbonline" target="_blank" class="popular-card">
+
+                            <div class="popular-icon">💰</div>
+
+                            <div class="popular-info">
+                                <strong>KGB Online</strong>
+                                <span>Kenaikan Gaji Berkala</span>
+                            </div>
+
+                            <span class="popular-arrow">→</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
                 <!-- KARTU LAYANAN -->
                 <div class="service-grid" id="serviceList">
 
+                    <!-- HASIL PENCARIAN KOSONG -->
                     <div class="no-result" id="noResult">
                         <div>🔍</div>
                         <h3>Layanan tidak ditemukan</h3>
@@ -290,9 +350,9 @@
                     </div>
 
 
-
                     <!-- 1 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="kepegawaian">
+
                         <div class="service-icon">📋</div>
 
                         <h3>Standar Layanan Kepegawaian</h3>
@@ -305,11 +365,13 @@
                         <a href="https://linktr.ee/SPKepegawaian" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 2 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="sistem">
+
                         <div class="service-icon">🎓</div>
 
                         <h3>Diklat ASN</h3>
@@ -322,11 +384,13 @@
                         <a href="https://simdiklat.kemenag.go.id/selvaPanel" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 3 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="kepegawaian">
+
                         <div class="service-icon">🗂️</div>
 
                         <h3>Menu Layanan Kepegawaian</h3>
@@ -339,11 +403,13 @@
                         <a href="https://linktr.ee/KepegawaianKemenagKPH" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 4 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="kepegawaian">
+
                         <div class="service-icon">🎓</div>
 
                         <h3>Usul Pencantuman Gelar</h3>
@@ -357,11 +423,13 @@
                             class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 5 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="absensi">
+
                         <div class="service-icon">📱</div>
 
                         <h3>Absensi Pusaka Kemenag</h3>
@@ -374,11 +442,13 @@
                         <a href="https://pusaka-v3.kemenag.go.id/" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 6 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="absensi">
+
                         <div class="service-icon">🕐</div>
 
                         <h3>Lapor Ketidakhadiran</h3>
@@ -391,11 +461,13 @@
                         <a href="https://absensi.kemenag.go.id/" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 7 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="kepegawaian">
+
                         <div class="service-icon">💰</div>
 
                         <h3>KGB Online</h3>
@@ -408,11 +480,13 @@
                         <a href="https://hrms.kemenag.go.id/kgbonline" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 8 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="sistem">
+
                         <div class="service-icon">🕘</div>
 
                         <h3>Presensi ASN</h3>
@@ -425,11 +499,13 @@
                         <a href="https://hrms.kemenag.go.id/presensi" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 9 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="sistem">
+
                         <div class="service-icon">💻</div>
 
                         <h3>SIMSDM / SIMPEG</h3>
@@ -442,11 +518,13 @@
                         <a href="https://simpeg5.kemenag.go.id/" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 10 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="sistem">
+
                         <div class="service-icon">🏢</div>
 
                         <h3>SIPKUA</h3>
@@ -459,11 +537,13 @@
                         <a href="https://hrms.kemenag.go.id/kua/" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 11 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="kepegawaian">
+
                         <div class="service-icon">📊</div>
 
                         <h3>MAGITA</h3>
@@ -476,11 +556,13 @@
                         <a href="https://hrms.kemenag.go.id/magita" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 12 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="kepegawaian">
+
                         <div class="service-icon">📚</div>
 
                         <h3>Tugas Belajar / Tubel</h3>
@@ -493,11 +575,13 @@
                         <a href="https://simsdm.kemenag.go.id/login" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 13 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="sistem">
+
                         <div class="service-icon">🪪</div>
 
                         <h3>ASN Digital</h3>
@@ -510,11 +594,13 @@
                         <a href="https://asndigital.bkn.go.id/" target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
 
                     <!-- 14 -->
-                    <div class="service-card">
+                    <div class="service-card" data-category="form">
+
                         <div class="service-icon">📝</div>
 
                         <h3>Form Digital Kemenag Kepahiang</h3>
@@ -528,353 +614,513 @@
                             target="_blank" class="service-link">
                             Buka Layanan →
                         </a>
+
                     </div>
 
                 </div>
 
-        </section>
-        <!-- =========================
-     PANDUAN
+                <!-- =========================
+     INFORMASI
 ========================= -->
 
-        <section class="guide reveal" id="panduan">
+                <section class="information reveal" id="informasi">
 
-            <div class="guide-container">
+                    <div class="information-container">
 
-                <div class="guide-header">
+                        <div class="information-header">
 
-                    <span class="section-badge">
-                        PANDUAN PENGGUNAAN
-                    </span>
+                            <div>
+                                <span class="section-badge">
+                                    INFORMASI
+                                </span>
 
-                    <h2>
-                        Akses Layanan<br>
-                        <span>Lebih Mudah.</span>
-                    </h2>
+                                <h2>
+                                    Informasi &amp; <span>Panduan Cepat.</span>
+                                </h2>
 
-                    <p>
-                        Ikuti beberapa langkah sederhana untuk menemukan
-                        dan menggunakan layanan kepegawaian yang Anda butuhkan.
-                    </p>
+                                <p>
+                                    Informasi singkat untuk membantu Anda menggunakan
+                                    layanan kepegawaian secara lebih mudah.
+                                </p>
+                            </div>
 
-                </div>
-
-
-                <div class="guide-steps">
-
-                    <!-- STEP 01 -->
-                    <div class="guide-card">
-
-                        <div class="guide-number">
-                            01
                         </div>
 
-                        <div class="guide-icon">
-                            🔎
+
+                        <div class="information-grid">
+
+                            <!-- CARD 1 -->
+                            <div class="info-card">
+
+                                <div class="info-icon">
+                                    🔎
+                                </div>
+
+                                <div class="info-content">
+
+                                    <span class="info-label">
+                                        TIPS
+                                    </span>
+
+                                    <h3>
+                                        Gunakan fitur pencarian
+                                    </h3>
+
+                                    <p>
+                                        Ketik nama layanan yang Anda cari pada
+                                        kolom pencarian untuk menemukan layanan
+                                        dengan lebih cepat.
+                                    </p>
+
+                                    <a href="#layanan" class="info-link">
+                                        Cari Layanan →
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CARD 2 -->
+                            <div class="info-card">
+
+                                <div class="info-icon">
+                                    📄
+                                </div>
+
+                                <div class="info-content">
+
+                                    <span class="info-label">
+                                        PERSIAPAN
+                                    </span>
+
+                                    <h3>
+                                        Siapkan dokumen
+                                    </h3>
+
+                                    <p>
+                                        Sebelum membuka layanan, pastikan data dan
+                                        dokumen yang diperlukan sudah tersedia.
+                                    </p>
+
+                                    <a href="#panduan" class="info-link">
+                                        Lihat Panduan →
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CARD 3 -->
+                            <div class="info-card">
+
+                                <div class="info-icon">
+                                    🔗
+                                </div>
+
+                                <div class="info-content">
+
+                                    <span class="info-label">
+                                        AKSES
+                                    </span>
+
+                                    <h3>
+                                        Periksa tautan layanan
+                                    </h3>
+
+                                    <p>
+                                        Setiap tombol layanan akan mengarahkan Anda
+                                        ke sistem atau halaman layanan terkait.
+                                    </p>
+
+                                    <a href="#layanan" class="info-link">
+                                        Lihat Layanan →
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CARD 4 -->
+                            <div class="info-card info-card-highlight">
+
+                                <div class="info-highlight-icon">
+                                    ✓
+                                </div>
+
+                                <div class="info-content">
+
+                                    <span class="info-label">
+                                        AKSES CEPAT
+                                    </span>
+
+                                    <h3>
+                                        Semua layanan dalam satu portal
+                                    </h3>
+
+                                    <p>
+                                        Gunakan portal ini sebagai titik awal untuk
+                                        menemukan layanan digital kepegawaian.
+                                    </p>
+
+                                    <a href="#layanan" class="info-link">
+                                        Jelajahi Portal →
+                                    </a>
+
+                                </div>
+
+                            </div>
+
                         </div>
-
-                        <h3>
-                            Pilih Layanan
-                        </h3>
-
-                        <p>
-                            Cari layanan yang Anda butuhkan melalui
-                            daftar layanan atau gunakan fitur pencarian.
-                        </p>
 
                     </div>
 
+                </section>
+                <!-- =========================
+                            PANDUAN
+                 ========================= -->
 
-                    <!-- STEP 02 -->
-                    <div class="guide-card">
+                <section class="guide reveal" id="panduan">
 
-                        <div class="guide-number">
-                            02
+                    <div class="guide-container">
+
+                        <div class="guide-header">
+
+                            <span class="section-badge">
+                                PANDUAN PENGGUNAAN
+                            </span>
+
+                            <h2>
+                                Akses Layanan<br>
+                                <span>Lebih Mudah.</span>
+                            </h2>
+
+                            <p>
+                                Ikuti beberapa langkah sederhana untuk menemukan
+                                dan menggunakan layanan kepegawaian yang Anda butuhkan.
+                            </p>
+
                         </div>
 
-                        <div class="guide-icon">
-                            🖱️
+
+                        <div class="guide-steps">
+
+                            <!-- STEP 01 -->
+                            <div class="guide-card">
+
+                                <div class="guide-number">
+                                    01
+                                </div>
+
+                                <div class="guide-icon">
+                                    🔎
+                                </div>
+
+                                <h3>
+                                    Pilih Layanan
+                                </h3>
+
+                                <p>
+                                    Cari layanan yang Anda butuhkan melalui
+                                    daftar layanan atau gunakan fitur pencarian.
+                                </p>
+
+                            </div>
+
+
+                            <!-- STEP 02 -->
+                            <div class="guide-card">
+
+                                <div class="guide-number">
+                                    02
+                                </div>
+
+                                <div class="guide-icon">
+                                    🖱️
+                                </div>
+
+                                <h3>
+                                    Buka Layanan
+                                </h3>
+
+                                <p>
+                                    Klik tombol "Buka Layanan" pada layanan
+                                    yang ingin Anda akses.
+                                </p>
+
+                            </div>
+
+
+                            <!-- STEP 03 -->
+                            <div class="guide-card">
+
+                                <div class="guide-number">
+                                    03
+                                </div>
+
+                                <div class="guide-icon">
+                                    ✅
+                                </div>
+
+                                <h3>
+                                    Selesaikan Proses
+                                </h3>
+
+                                <p>
+                                    Ikuti petunjuk pada sistem layanan hingga
+                                    proses pengajuan atau kebutuhan Anda selesai.
+                                </p>
+
+                            </div>
+
                         </div>
 
-                        <h3>
-                            Buka Layanan
-                        </h3>
 
-                        <p>
-                            Klik tombol "Buka Layanan" pada layanan
-                            yang ingin Anda akses.
-                        </p>
+                        <div class="guide-note">
+
+                            <div class="guide-note-icon">
+                                💡
+                            </div>
+
+                            <div>
+                                <strong>Tips untuk pengguna</strong>
+
+                                <p>
+                                    Pastikan data dan dokumen yang diperlukan
+                                    sudah disiapkan sebelum mengakses layanan.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="guide-action">
+
+                            <a href="#layanan" class="btn-primary">
+                                Jelajahi Semua Layanan
+                                <span>→</span>
+                            </a>
+
+                        </div>
 
                     </div>
 
+                </section>
 
-                    <!-- STEP 03 -->
-                    <div class="guide-card">
-
-                        <div class="guide-number">
-                            03
-                        </div>
-
-                        <div class="guide-icon">
-                            ✅
-                        </div>
-
-                        <h3>
-                            Selesaikan Proses
-                        </h3>
-
-                        <p>
-                            Ikuti petunjuk pada sistem layanan hingga
-                            proses pengajuan atau kebutuhan Anda selesai.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="guide-note">
-
-                    <div class="guide-note-icon">
-                        💡
-                    </div>
-
-                    <div>
-                        <strong>Tips untuk pengguna</strong>
-
-                        <p>
-                            Pastikan data dan dokumen yang diperlukan
-                            sudah disiapkan sebelum mengakses layanan.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="guide-action">
-
-                    <a href="#layanan" class="btn-primary">
-                        Jelajahi Semua Layanan
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- =========================
-     TENTANG PORTAL
-========================= -->
-
-        <section class="about reveal" id="tentang">
-
-            <div class="about-container">
-
-                <div class="about-content">
-
-                    <span class="section-badge">
+                <!-- =========================
                         TENTANG PORTAL
-                    </span>
+                ========================= -->
 
-                    <h2>
-                        Satu Portal untuk
-                        <span>Layanan Kepegawaian.</span>
-                    </h2>
+                <section class="about reveal" id="tentang">
 
-                    <p>
-                        Portal Layanan Kepegawaian Kementerian Agama Kabupaten
-                        Kepahiang hadir sebagai pusat akses berbagai layanan
-                        digital kepegawaian dalam satu tempat.
-                    </p>
+                    <div class="about-container">
 
-                    <p>
-                        Melalui portal ini, pengguna dapat menemukan berbagai
-                        sistem dan layanan yang dibutuhkan dengan lebih mudah,
-                        cepat, dan terarah.
-                    </p>
+                        <div class="about-content">
 
-                    <div class="about-points">
+                            <span class="section-badge">
+                                TENTANG PORTAL
+                            </span>
 
-                        <div class="about-point">
-                            <div class="about-point-icon">✓</div>
-                            <div>
-                                <strong>Akses Terpusat</strong>
-                                <p>Berbagai layanan tersedia dalam satu portal.</p>
+                            <h2>
+                                Satu Portal untuk
+                                <span>Layanan Kepegawaian.</span>
+                            </h2>
+
+                            <p>
+                                Portal Layanan Kepegawaian Kementerian Agama Kabupaten
+                                Kepahiang hadir sebagai pusat akses berbagai layanan
+                                digital kepegawaian dalam satu tempat.
+                            </p>
+
+                            <p>
+                                Melalui portal ini, pengguna dapat menemukan berbagai
+                                sistem dan layanan yang dibutuhkan dengan lebih mudah,
+                                cepat, dan terarah.
+                            </p>
+
+                            <div class="about-points">
+
+                                <div class="about-point">
+                                    <div class="about-point-icon">✓</div>
+                                    <div>
+                                        <strong>Akses Terpusat</strong>
+                                        <p>Berbagai layanan tersedia dalam satu portal.</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-point">
+                                    <div class="about-point-icon">✓</div>
+                                    <div>
+                                        <strong>Mudah Digunakan</strong>
+                                        <p>Temukan layanan dengan pencarian dan kategori.</p>
+                                    </div>
+                                </div>
+
+                                <div class="about-point">
+                                    <div class="about-point-icon">✓</div>
+                                    <div>
+                                        <strong>Terhubung ke Sistem Resmi</strong>
+                                        <p>Setiap layanan mengarahkan pengguna ke sistem terkait.</p>
+                                    </div>
+                                </div>
+
                             </div>
+
                         </div>
 
-                        <div class="about-point">
-                            <div class="about-point-icon">✓</div>
-                            <div>
-                                <strong>Mudah Digunakan</strong>
-                                <p>Temukan layanan dengan pencarian dan kategori.</p>
-                            </div>
-                        </div>
 
-                        <div class="about-point">
-                            <div class="about-point-icon">✓</div>
-                            <div>
-                                <strong>Terhubung ke Sistem Resmi</strong>
-                                <p>Setiap layanan mengarahkan pengguna ke sistem terkait.</p>
+                        <div class="about-visual">
+
+                            <div class="about-card-main">
+
+                                <div class="about-logo">
+                                    K
+                                </div>
+
+                                <span class="about-status">
+                                    ● PORTAL DIGITAL
+                                </span>
+
+                                <h3>
+                                    Kementerian Agama
+                                    Kabupaten Kepahiang
+                                </h3>
+
+                                <p>
+                                    Pusat akses layanan digital
+                                    kepegawaian.
+                                </p>
+
+                                <div class="about-line"></div>
+
+                                <div class="about-mini-stats">
+
+                                    <div>
+                                        <strong>14+</strong>
+                                        <span>Layanan</span>
+                                    </div>
+
+                                    <div>
+                                        <strong>24/7</strong>
+                                        <span>Akses</span>
+                                    </div>
+
+                                    <div>
+                                        <strong>1</strong>
+                                        <span>Portal</span>
+                                    </div>
+
+                                </div>
+
                             </div>
+
+                            <div class="about-decoration decoration-one"></div>
+                            <div class="about-decoration decoration-two"></div>
+
                         </div>
 
                     </div>
 
-                </div>
+                </section>
 
+                <!-- =========================
+                            FOOTER
+                ========================= -->
 
-                <div class="about-visual">
+                <footer class="footer">
 
-                    <div class="about-card-main">
+                    <div class="footer-container">
 
-                        <div class="about-logo">
-                            K
+                        <!-- BRAND -->
+                        <div class="footer-brand">
+
+                            <div class="footer-logo">
+                                K
+                            </div>
+
+                            <div class="footer-brand-text">
+                                <strong>KEMENTERIAN AGAMA</strong>
+                                <span>KABUPATEN KEPAHIANG</span>
+                            </div>
+
+                            <p>
+                                Portal layanan digital kepegawaian untuk memudahkan
+                                akses informasi dan berbagai layanan dalam satu tempat.
+                            </p>
+
+                            <div class="footer-status">
+                                <span></span>
+                                Portal layanan aktif
+                            </div>
+
                         </div>
 
-                        <span class="about-status">
-                            ● PORTAL DIGITAL
-                        </span>
 
-                        <h3>
-                            Kementerian Agama
-                            Kabupaten Kepahiang
-                        </h3>
+                        <!-- NAVIGASI -->
+                        <div class="footer-column">
 
-                        <p>
-                            Pusat akses layanan digital
-                            kepegawaian.
-                        </p>
+                            <h4>Navigasi</h4>
 
-                        <div class="about-line"></div>
+                            <a href="#beranda">Beranda</a>
+                            <a href="#layanan">Layanan</a>
+                            <a href="#panduan">Panduan</a>
+                            <a href="#informasi">Informasi</a>
+                            <a href="#tentang">Tentang</a>
 
-                        <div class="about-mini-stats">
+                        </div>
 
-                            <div>
-                                <strong>14+</strong>
-                                <span>Layanan</span>
-                            </div>
 
-                            <div>
-                                <strong>24/7</strong>
-                                <span>Akses</span>
-                            </div>
+                        <!-- LAYANAN -->
+                        <div class="footer-column">
 
-                            <div>
-                                <strong>1</strong>
-                                <span>Portal</span>
-                            </div>
+                            <h4>Layanan</h4>
+
+                            <a href="#layanan">Kepegawaian</a>
+                            <a href="#layanan">Absensi</a>
+                            <a href="#layanan">Sistem Digital</a>
+                            <a href="#layanan">Form Digital</a>
+
+                        </div>
+
+
+                        <!-- AKSES -->
+                        <div class="footer-column">
+
+                            <h4>Akses Cepat</h4>
+
+                            <a href="#layanan">Semua Layanan</a>
+                            <a href="#informasi">Informasi</a>
+                            <a href="#panduan">Cara Menggunakan</a>
+                            <a href="#tentang">Tentang Portal</a>
 
                         </div>
 
                     </div>
 
-                    <div class="about-decoration decoration-one"></div>
-                    <div class="about-decoration decoration-two"></div>
 
-                </div>
+                    <!-- FOOTER BOTTOM -->
 
-            </div>
-
-        </section>
-
-        <!-- =========================
-     FOOTER
-========================= -->
-
-        <footer class="footer">
-
-            <div class="footer-container">
-
-                <!-- BRAND -->
-                <div class="footer-brand">
-
-                    <div class="footer-logo">
-
-                        <div class="footer-logo-icon">
-                            K
-                        </div>
+                    <div class="footer-bottom">
 
                         <div>
-                            <strong>KEMENAG</strong>
-                            <span>KABUPATEN KEPAHIANG</span>
+                            © 2026 Kementerian Agama Kabupaten Kepahiang
+                        </div>
+
+                        <div class="footer-bottom-right">
+                            Portal Layanan Kepegawaian
                         </div>
 
                     </div>
 
-                    <p>
-                        Portal layanan digital kepegawaian untuk membantu
-                        akses berbagai layanan dalam satu tempat.
-                    </p>
-
-                </div>
-
-
-                <!-- NAVIGASI -->
-                <div class="footer-column">
-
-                    <h3>Navigasi</h3>
-
-                    <a href="#beranda">Beranda</a>
-                    <a href="#layanan">Layanan</a>
-                    <a href="#panduan">Panduan</a>
-                    <a href="#tentang">Tentang</a>
-
-                </div>
-
-
-                <!-- LAYANAN -->
-                <div class="footer-column">
-
-                    <h3>Layanan</h3>
-
-                    <a href="#layanan">Kepegawaian</a>
-                    <a href="#layanan">Absensi</a>
-                    <a href="#layanan">Pendidikan</a>
-                    <a href="#layanan">Administrasi</a>
-
-                </div>
-
-
-                <!-- INFORMASI -->
-                <div class="footer-column">
-
-                    <h3>Portal</h3>
-
-                    <span>● Portal Digital</span>
-                    <span>14+ Layanan</span>
-                    <span>Akses Online</span>
-
-                </div>
-
-            </div>
-
-
-            <!-- BOTTOM -->
-
-            <div class="footer-bottom">
-
-                <div>
-                    © 2026 Kementerian Agama Kabupaten Kepahiang
-                </div>
-
-                <div>
-                    Portal Layanan Kepegawaian
-                </div>
-
-            </div>
-
-        </footer>
-
+                </footer>
 
     </main>
 
 
     <script src="script.js"></script>
 
-</body>
 </body>
 
 </html>
