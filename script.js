@@ -1,3 +1,7 @@
+/* =========================
+   SERVICE SEARCH & FILTER
+========================= */
+
 const searchInput = document.getElementById("searchService");
 const serviceCards = document.querySelectorAll(".service-card");
 const noResult = document.getElementById("noResult");
@@ -8,7 +12,6 @@ let currentFilter = "all";
 function filterServices() {
 
     const keyword = searchInput.value.toLowerCase().trim();
-
     let found = 0;
 
     serviceCards.forEach(function (card) {
@@ -51,13 +54,19 @@ function filterServices() {
 }
 
 
-// SEARCH
-searchInput.addEventListener("input", function () {
-    filterServices();
-});
+/* SEARCH */
+
+if (searchInput) {
+
+    searchInput.addEventListener("input", function () {
+        filterServices();
+    });
+
+}
 
 
-// FILTER
+/* FILTER */
+
 filterButtons.forEach(function (button) {
 
     button.addEventListener("click", function () {
@@ -66,15 +75,16 @@ filterButtons.forEach(function (button) {
             btn.classList.remove("active");
         });
 
-        button.classList.add("active");
+        this.classList.add("active");
 
-        currentFilter = button.dataset.filter;
+        currentFilter = this.dataset.filter;
 
         filterServices();
 
     });
 
 });
+
 
 /* =========================
    NAVBAR
@@ -86,77 +96,109 @@ const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-link");
 
 
-// NAVBAR SAAT SCROLL
+/* NAVBAR SAAT SCROLL */
 
 window.addEventListener("scroll", function () {
 
+    if (!navbar) return;
+
     if (window.scrollY > 30) {
+
         navbar.classList.add("scrolled");
+
     } else {
+
         navbar.classList.remove("scrolled");
+
     }
 
 });
 
 
-// BUKA / TUTUP MENU HP
+/* MENU MOBILE */
 
-navToggle.addEventListener("click", function () {
+if (navToggle && navMenu) {
 
-    navToggle.classList.toggle("active");
+    navToggle.addEventListener("click", function () {
 
-    navMenu.classList.toggle("open");
+        navToggle.classList.toggle("active");
 
-});
+        navMenu.classList.toggle("open");
+
+    });
+
+}
 
 
-// KLIK MENU → TUTUP MENU HP
+/* KLIK MENU → TUTUP */
 
 navLinks.forEach(function (link) {
 
     link.addEventListener("click", function () {
 
-        navToggle.classList.remove("active");
+        if (navToggle) {
+            navToggle.classList.remove("active");
+        }
 
-        navMenu.classList.remove("open");
+        if (navMenu) {
+            navMenu.classList.remove("open");
+        }
 
     });
 
 });
 
+
 /* =========================
    SCROLL REVEAL
 ========================= */
 
-const revealElements = document.querySelectorAll(".reveal");
+const revealElements =
+    document.querySelectorAll(".reveal");
 
-const revealObserver = new IntersectionObserver(
-    function (entries) {
+if ("IntersectionObserver" in window) {
 
-        entries.forEach(function (entry) {
+    const revealObserver = new IntersectionObserver(
 
-            if (entry.isIntersecting) {
+        function (entries) {
 
-                entry.target.classList.add("show");
+            entries.forEach(function (entry) {
 
-                revealObserver.unobserve(entry.target);
+                if (entry.isIntersecting) {
 
-            }
+                    entry.target.classList.add("show");
 
-        });
+                    revealObserver.unobserve(entry.target);
 
-    },
-    {
-        threshold: 0.12
-    }
-);
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.12
+        }
+
+    );
 
 
-revealElements.forEach(function (element) {
+    revealElements.forEach(function (element) {
 
-    revealObserver.observe(element);
+        revealObserver.observe(element);
 
-});
+    });
+
+} else {
+
+    revealElements.forEach(function (element) {
+
+        element.classList.add("show");
+
+    });
+
+}
+
 
 /* =========================
    PAGE LOADER
@@ -164,69 +206,15 @@ revealElements.forEach(function (element) {
 
 window.addEventListener("load", function () {
 
-    const loader = document.getElementById("pageLoader");
+    const loader =
+        document.getElementById("pageLoader");
+
+    if (!loader) return;
 
     setTimeout(function () {
 
         loader.classList.add("hide");
 
     }, 500);
-
-});
-
-document.querySelectorAll(".filter-btn").forEach(function(button) {
-
-    button.addEventListener("click", function() {
-
-        const kategori = this.getAttribute("data-filter");
-
-        document.querySelectorAll(".filter-btn").forEach(function(btn) {
-            btn.classList.remove("active");
-        });
-
-        this.classList.add("active");
-
-        document.querySelectorAll(".service-card").forEach(function(card) {
-
-            const kategoriCard = card.getAttribute("data-category");
-
-            if (kategori === "all" || kategoriCard === kategori) {
-                card.style.display = "flex";
-            } else {
-                card.style.display = "none";
-            }
-
-        });
-
-    });
-
-});
-
-document.querySelectorAll(".filter-btn").forEach(function(button) {
-
-    button.addEventListener("click", function() {
-
-        const kategori = this.dataset.filter;
-
-        document.querySelectorAll(".filter-btn").forEach(function(btn) {
-            btn.classList.remove("active");
-        });
-
-        this.classList.add("active");
-
-        document.querySelectorAll(".service-card").forEach(function(card) {
-
-            if (
-                kategori === "all" ||
-                card.dataset.category === kategori
-            ) {
-                card.style.display = "flex";
-            } else {
-                card.style.display = "none";
-            }
-
-        });
-
-    });
 
 });
