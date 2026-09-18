@@ -173,3 +173,60 @@ window.addEventListener("load", function () {
     }, 500);
 
 });
+
+document.querySelectorAll(".filter-btn").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const kategori = this.getAttribute("data-filter");
+
+        document.querySelectorAll(".filter-btn").forEach(function(btn) {
+            btn.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        document.querySelectorAll(".service-card").forEach(function(card) {
+
+            const kategoriCard = card.getAttribute("data-category");
+
+            if (kategori === "all" || kategoriCard === kategori) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+
+        });
+
+    });
+
+});
+
+document.querySelectorAll(".filter-btn").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        const kategori = this.dataset.filter;
+
+        document.querySelectorAll(".filter-btn").forEach(function(btn) {
+            btn.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        document.querySelectorAll(".service-card").forEach(function(card) {
+
+            if (
+                kategori === "all" ||
+                card.dataset.category === kategori
+            ) {
+                card.style.display = "flex";
+            } else {
+                card.style.display = "none";
+            }
+
+        });
+
+    });
+
+});
