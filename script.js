@@ -397,6 +397,81 @@ const previewStatus =
 const previewDot =
     document.getElementById("previewDot");
 
+// ==========================================
+// LOGIN ADMIN SUPABASE
+// ==========================================
+
+const adminLogin = document.getElementById("adminLogin");
+const adminEmail = document.getElementById("adminEmail");
+const adminPassword = document.getElementById("adminPassword");
+const adminLoginButton = document.getElementById("adminLoginButton");
+const adminLoginError = document.getElementById("adminLoginError");
+const adminPanelContent = document.getElementById("adminPanelContent");
+const adminPreview = document.getElementById("adminPreview");
+
+function showAdminLogin() {
+    if (adminLogin) adminLogin.style.display = "block";
+    if (adminPanelContent) adminPanelContent.style.display = "none";
+    if (adminPreview) adminPreview.style.display = "none";
+}
+
+function showAdminPanel() {
+    if (adminLogin) adminLogin.style.display = "none";
+    if (adminPanelContent) adminPanelContent.style.display = "grid";
+    if (adminPreview) adminPreview.style.display = "block";
+}
+
+async function checkAdminSession() {
+    const { data } = await supabaseClient.auth.getSession();
+
+    if (data.session) {
+        showAdminPanel();
+    } else {
+        showAdminLogin();
+    }
+}
+
+if (adminLoginButton) {
+    adminLoginButton.addEventListener("click", async function () {
+
+        const email = adminEmail.value.trim();
+        const password = adminPassword.value;
+
+        if (!email || !password) {
+            adminLoginError.textContent =
+                "Email dan password wajib diisi.";
+            return;
+        }
+
+        adminLoginButton.disabled = true;
+        adminLoginButton.textContent = "Memproses...";
+
+        const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+        adminLoginButton.disabled = false;
+        adminLoginButton.textContent = "Masuk ke Admin";
+
+        if (error) {
+            console.error("Login admin gagal:", error);
+
+            adminLoginError.textContent =
+                "Email atau password salah.";
+
+            return;
+        }
+
+        adminLoginError.textContent = "";
+
+        showAdminPanel();
+
+        alert("Login admin berhasil.");
+    });
+}
+
 
 // PUBLIC ELEMENT
 const publicAnnouncement =
@@ -416,14 +491,16 @@ const publicStatusDot =
 // OPEN ADMIN
 // =========================
 
-function openAdminPanel() {
-
+async function openAdminPanel() {
     if (!adminModal) return;
 
     adminModal.classList.add("show");
-
     document.body.style.overflow = "hidden";
+
+    await checkAdminSession();
 }
+
+
 
 
 // =========================
@@ -812,82 +889,32 @@ updateDashboardTime();
    DYNAMIC INFORMATION
 ========================= */
 
-const informationData = [
+// ==========================================
+// SUPABASE CONNECTION
+// ==========================================
 
-    {
-        id: 1,
-        category: "pengumuman",
-        title: "Selamat Datang di Portal Kepegawaian",
-        description:
-            "Portal digital untuk memudahkan akses berbagai layanan kepegawaian Kementerian Agama Kabupaten Kepahiang.",
-        content:
-            "Selamat datang di Portal Layanan Kepegawaian Kementerian Agama Kabupaten Kepahiang.\n\nPortal ini menyediakan akses terpusat menuju berbagai sistem dan layanan digital yang berkaitan dengan kebutuhan kepegawaian.",
-        date: "18 September 2026",
-        icon: "📢"
-    },
+const SUPABASE_URL = "https://pwoopuxfonwhqdtomujr.supabase.co";
 
-    {
-        id: 2,
-        category: "panduan",
-        title: "Panduan Mengakses Layanan Digital",
-        description:
-            "Pelajari langkah sederhana untuk menemukan dan membuka layanan yang tersedia pada portal.",
-        content:
-            "1. Buka halaman Layanan.\n\n2. Gunakan pencarian atau filter kategori.\n\n3. Pilih layanan yang dibutuhkan.\n\n4. Baca informasi layanan.\n\n5. Klik tombol Buka Layanan untuk menuju sistem terkait.",
-        date: "18 September 2026",
-        icon: "📖"
-    },
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_fd5CuJrWpzw41FlZJjz72Q_p2iO_0mn";
 
-    {
-        id: 3,
-        category: "jadwal",
-        title: "Jadwal Pemeliharaan Sistem",
-        description:
-            "Informasi mengenai jadwal pemeliharaan sistem dapat diperbarui melalui pusat informasi portal.",
-        content:
-            "Informasi jadwal pemeliharaan sistem akan ditampilkan pada halaman ini apabila terdapat pemeliharaan yang telah dijadwalkan.",
-        date: "18 September 2026",
-        icon: "🕘"
-    },
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
 
-    {
-        id: 4,
-        category: "pengumuman",
-        title: "Pembaruan Layanan Kepegawaian",
-        description:
-            "Informasi mengenai pembaruan atau perubahan akses layanan digital akan disampaikan melalui portal.",
-        content:
-            "Setiap perubahan penting pada layanan digital dapat diinformasikan melalui halaman Informasi.\n\nSilakan periksa halaman ini secara berkala untuk memperoleh informasi terbaru.",
-        date: "17 September 2026",
-        icon: "🔔"
-    },
 
-    {
-        id: 5,
-        category: "panduan",
-        title: "Tips Menggunakan Portal",
-        description:
-            "Gunakan fitur pencarian untuk menemukan layanan dengan lebih cepat.",
-        content:
-            "Gunakan kata kunci yang sesuai dengan nama layanan.\n\nAnda juga dapat menggunakan filter kategori untuk mempersempit hasil pencarian.",
-        date: "16 September 2026",
-        icon: "💡"
-    },
+// ==========================================
+// DATA INFORMASI DARI SUPABASE
+// ==========================================
 
-    {
-        id: 6,
-        category: "jadwal",
-        title: "Informasi Jam Akses Layanan",
-        description:
-            "Setiap sistem layanan dapat memiliki jadwal operasional yang berbeda.",
-        content:
-            "Portal menyediakan akses menuju berbagai sistem eksternal.\n\nJam operasional masing-masing sistem dapat berbeda sehingga pengguna disarankan memperhatikan informasi pada layanan yang dipilih.",
-        date: "15 September 2026",
-        icon: "📅"
-    }
+let informationData = [];
 
-];
 
+// ==========================================
+// ELEMENT INFORMASI PUBLIK
+// ==========================================
 
 const informationList =
     document.getElementById("informationList");
@@ -906,17 +933,135 @@ const informationFilters =
         ".information-filter"
     );
 
-
 let currentInformationFilter = "all";
 
 
-/* =========================
-   RENDER INFORMATION
-========================= */
+// ==========================================
+// LOAD INFORMATION
+// ==========================================
+
+async function loadInformation() {
+
+    const { data, error } =
+        await supabaseClient
+            .from("informasi")
+            .select("*")
+            .order("date", {
+                ascending: false
+            });
+
+    if (error) {
+
+        console.error(
+            "Gagal mengambil informasi:",
+            error
+        );
+
+        return;
+    }
+
+    informationData = data || [];
+
+    renderInformation();
+    renderAdminInformation();
+}
+
+
+// ==========================================
+// RENDER ADMIN INFORMATION
+// ==========================================
+
+function renderAdminInformation() {
+
+    const adminInformationList =
+        document.getElementById(
+            "adminInformationList"
+        );
+
+    if (!adminInformationList) return;
+
+    adminInformationList.innerHTML = "";
+
+
+    if (informationData.length === 0) {
+
+        adminInformationList.innerHTML = `
+            <div style="
+                padding: 20px;
+                text-align: center;
+                color: #71837b;
+                background: #f7faf8;
+                border-radius: 12px;
+            ">
+                Belum ada informasi tersimpan.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    informationData.forEach(function (item) {
+
+        const informationItem =
+            document.createElement("div");
+
+        informationItem.className =
+            "admin-information-item";
+
+
+        informationItem.innerHTML = `
+            <div class="admin-information-item-main">
+
+                <h4>
+                    ${item.icon || "📢"} ${item.title}
+                </h4>
+
+                <p>
+                    ${item.category.toUpperCase()}
+                    • ${item.date}
+                </p>
+
+            </div>
+
+            <div class="admin-information-actions">
+
+                <button
+    type="button"
+    class="admin-edit-info"
+    data-id="${item.id}"
+>
+    ✏️ Edit
+</button>
+
+<button
+    type="button"
+    class="admin-delete-info"
+    data-id="${item.id}"
+>
+    🗑️ Hapus
+</button> 
+            </div>
+        `;
+
+
+        adminInformationList.appendChild(
+            informationItem
+        );
+
+    });
+
+}
+
+
+// ==========================================
+// RENDER INFORMATION PUBLIC
+// ==========================================
 
 function renderInformation() {
 
     if (!informationList) return;
+
 
     const keyword =
         informationSearch
@@ -931,19 +1076,20 @@ function renderInformation() {
 
             const matchesCategory =
                 currentInformationFilter === "all" ||
-                item.category === currentInformationFilter;
+                item.category ===
+                currentInformationFilter;
 
 
             const matchesSearch =
-                item.title
+                (item.title || "")
                     .toLowerCase()
                     .includes(keyword) ||
 
-                item.description
+                (item.description || "")
                     .toLowerCase()
                     .includes(keyword) ||
 
-                item.content
+                (item.content || "")
                     .toLowerCase()
                     .includes(keyword);
 
@@ -964,6 +1110,7 @@ function renderInformation() {
         const card =
             document.createElement("article");
 
+
         card.className =
             "dynamic-info-card";
 
@@ -971,7 +1118,7 @@ function renderInformation() {
         card.innerHTML = `
 
             <div class="dynamic-info-icon">
-                ${item.icon}
+                ${item.icon || "📢"}
             </div>
 
             <div class="dynamic-info-body">
@@ -1006,6 +1153,7 @@ function renderInformation() {
                 </button>
 
             </div>
+
         `;
 
 
@@ -1034,9 +1182,9 @@ function renderInformation() {
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+// ==========================================
+// SEARCH
+// ==========================================
 
 if (informationSearch) {
 
@@ -1048,9 +1196,9 @@ if (informationSearch) {
 }
 
 
-/* =========================
-   FILTER
-========================= */
+// ==========================================
+// FILTER
+// ==========================================
 
 informationFilters.forEach(
     function (button) {
@@ -1070,7 +1218,9 @@ informationFilters.forEach(
                 );
 
 
-                this.classList.add("active");
+                this.classList.add(
+                    "active"
+                );
 
 
                 currentInformationFilter =
@@ -1086,9 +1236,9 @@ informationFilters.forEach(
 );
 
 
-/* =========================
-   INFORMATION MODAL
-========================= */
+// ==========================================
+// INFORMATION MODAL
+// ==========================================
 
 const informationModal =
     document.getElementById(
@@ -1143,22 +1293,42 @@ function openInformationDetail(id) {
     }
 
 
-    detailCategory.textContent =
-        item.category.toUpperCase();
+    if (detailCategory) {
 
-    detailTitle.textContent =
-        item.title;
+        detailCategory.textContent =
+            item.category.toUpperCase();
 
-    detailDate.textContent =
-        item.date;
+    }
 
-    detailContent.textContent =
-        item.content;
+
+    if (detailTitle) {
+
+        detailTitle.textContent =
+            item.title;
+
+    }
+
+
+    if (detailDate) {
+
+        detailDate.textContent =
+            item.date;
+
+    }
+
+
+    if (detailContent) {
+
+        detailContent.textContent =
+            item.content;
+
+    }
 
 
     informationModal.classList.add(
         "show"
     );
+
 
     document.body.style.overflow =
         "hidden";
@@ -1170,15 +1340,21 @@ function closeInformationDetail() {
 
     if (!informationModal) return;
 
+
     informationModal.classList.remove(
         "show"
     );
+
 
     document.body.style.overflow =
         "";
 
 }
 
+
+// ==========================================
+// DETAIL BUTTON
+// ==========================================
 
 if (informationList) {
 
@@ -1209,6 +1385,10 @@ if (informationList) {
 }
 
 
+// ==========================================
+// CLOSE MODAL
+// ==========================================
+
 if (informationModalClose) {
 
     informationModalClose.addEventListener(
@@ -1233,9 +1413,7 @@ document.addEventListener(
     "keydown",
     function (event) {
 
-        if (
-            event.key === "Escape"
-        ) {
+        if (event.key === "Escape") {
 
             closeInformationDetail();
 
@@ -1245,8 +1423,554 @@ document.addEventListener(
 );
 
 
+// ==========================================
+// INITIAL LOAD
+// ==========================================
+
+loadInformation();
+
 /* =========================
    INITIAL RENDER
 ========================= */
 
 renderInformation();
+
+const adminLogout = document.getElementById("adminLogout");
+
+if (adminLogout) {
+    adminLogout.addEventListener("click", async function () {
+
+        await supabaseClient.auth.signOut();
+
+        showAdminLogin();
+
+        alert("Berhasil keluar dari Aconst informationData const informationData const informationData dmin.");
+    });
+}
+
+// ==========================================
+// TAMBAH INFORMASI KE SUPABASE
+// ==========================================
+
+const infoCategory = document.getElementById("infoCategory");
+const infoTitle = document.getElementById("infoTitle");
+const infoDescription = document.getElementById("infoDescription");
+const infoContent = document.getElementById("infoContent");
+const infoDate = document.getElementById("infoDate");
+const infoIcon = document.getElementById("infoIcon");
+const addInformationButton =
+    document.getElementById("addInformationButton");
+const informationAdminMessage =
+    document.getElementById("informationAdminMessage");
+
+if (addInformationButton) {
+
+    addInformationButton.addEventListener("click", async function () {
+
+        const category = infoCategory.value;
+        const title = infoTitle.value.trim();
+        const description = infoDescription.value.trim();
+        const content = infoContent.value.trim();
+        const date = infoDate.value;
+        const icon = infoIcon.value.trim() || "📢";
+
+        if (!title || !description || !content || !date) {
+            informationAdminMessage.textContent =
+                "⚠️ Lengkapi semua data terlebih dahulu.";
+            informationAdminMessage.style.color = "#c0392b";
+            return;
+        }
+
+        addInformationButton.disabled = true;
+        addInformationButton.textContent = "Menyimpan...";
+
+        const { data, error } = await supabaseClient
+            .from("informasi")
+            .insert([
+                {
+                    category: category,
+                    title: title,
+                    description: description,
+                    content: content,
+                    date: date,
+                    icon: icon
+                }
+            ])
+            .select();
+
+        if (error) {
+
+            console.error("Gagal menambahkan informasi:", error);
+
+            informationAdminMessage.textContent =
+                "❌ Gagal menyimpan informasi.";
+
+            informationAdminMessage.style.color = "#c0392b";
+
+            addInformationButton.disabled = false;
+            addInformationButton.textContent =
+                "+ Tambah Informasi";
+
+            return;
+        }
+
+        console.log("Informasi berhasil ditambahkan:", data);
+
+        informationAdminMessage.textContent =
+            "✅ Informasi berhasil ditambahkan!";
+
+        informationAdminMessage.style.color = "#087443";
+
+        infoTitle.value = "";
+        infoDescription.value = "";
+        infoContent.value = "";
+        infoDate.value = "";
+        infoIcon.value = "";
+
+        addInformationButton.disabled = false;
+        addInformationButton.textContent =
+            "+ Tambah Informasi";
+
+        // Ambil ulang informasi dari Supabase
+        await loadInformation();
+
+    });
+}
+
+// ==========================================
+// EDIT & DELETE INFORMATION
+// ==========================================
+
+const editInformationModal = document.getElementById("editInformationModal");
+const editInformationOverlay = document.getElementById("editInformationOverlay");
+const editInformationClose = document.getElementById("editInformationClose");
+
+const editInfoId = document.getElementById("editInfoId");
+const editInfoCategory = document.getElementById("editInfoCategory");
+const editInfoTitle = document.getElementById("editInfoTitle");
+const editInfoDescription = document.getElementById("editInfoDescription");
+const editInfoContent = document.getElementById("editInfoContent");
+const editInfoDate = document.getElementById("editInfoDate");
+const editInfoIcon = document.getElementById("editInfoIcon");
+
+const saveEditInformation = document.getElementById("saveEditInformation");
+const editInformationMessage = document.getElementById("editInformationMessage");
+
+
+// ==========================================
+// OPEN EDIT
+// ==========================================
+
+function openEditInformation(id) {
+
+    const item = informationData.find(function (information) {
+        return String(information.id) === String(id);
+    });
+
+    if (!item) {
+        console.error("Data tidak ditemukan:", id);
+        return;
+    }
+
+    if (!editInformationModal) {
+        console.error("Modal Edit tidak ditemukan di HTML.");
+        return;
+    }
+
+    editInfoId.value = item.id;
+    editInfoCategory.value = item.category || "";
+    editInfoTitle.value = item.title || "";
+    editInfoDescription.value = item.description || "";
+    editInfoContent.value = item.content || "";
+    editInfoDate.value = item.date || "";
+    editInfoIcon.value = item.icon || "📢";
+
+    if (editInformationMessage) {
+        editInformationMessage.textContent = "";
+    }
+
+    editInformationModal.classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+
+// ==========================================
+// CLOSE EDIT
+// ==========================================
+
+function closeEditInformation() {
+
+    if (!editInformationModal) return;
+
+    editInformationModal.classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+
+if (editInformationClose) {
+    editInformationClose.addEventListener(
+        "click",
+        closeEditInformation
+    );
+}
+
+
+if (editInformationOverlay) {
+    editInformationOverlay.addEventListener(
+        "click",
+        closeEditInformation
+    );
+}
+
+
+// ==========================================
+// SAVE EDIT
+// ==========================================
+
+if (saveEditInformation) {
+
+    saveEditInformation.addEventListener(
+        "click",
+        async function () {
+
+            const id = editInfoId.value;
+            const category = editInfoCategory.value;
+            const title = editInfoTitle.value.trim();
+            const description = editInfoDescription.value.trim();
+            const content = editInfoContent.value.trim();
+            const date = editInfoDate.value;
+            const icon = editInfoIcon.value.trim() || "📢";
+
+            if (!title || !description || !content || !date) {
+
+                editInformationMessage.textContent =
+                    "⚠️ Lengkapi semua data terlebih dahulu.";
+
+                editInformationMessage.style.color = "#c0392b";
+
+                return;
+            }
+
+            saveEditInformation.disabled = true;
+            saveEditInformation.textContent = "Menyimpan...";
+
+            const { error } = await supabaseClient
+                .from("informasi")
+                .update({
+                    category: category,
+                    title: title,
+                    description: description,
+                    content: content,
+                    date: date,
+                    icon: icon
+                })
+                .eq("id", id);
+
+            if (error) {
+
+                console.error(
+                    "Gagal mengubah informasi:",
+                    error
+                );
+
+                editInformationMessage.textContent =
+                    "❌ Gagal mengubah informasi.";
+
+                editInformationMessage.style.color =
+                    "#c0392b";
+
+                saveEditInformation.disabled = false;
+                saveEditInformation.textContent =
+                    "Simpan Perubahan";
+
+                return;
+            }
+
+            editInformationMessage.textContent =
+                "✅ Informasi berhasil diperbarui!";
+
+            editInformationMessage.style.color =
+                "#087443";
+
+            await loadInformation();
+
+            saveEditInformation.disabled = false;
+            saveEditInformation.textContent =
+                "Simpan Perubahan";
+
+            setTimeout(function () {
+                closeEditInformation();
+            }, 500);
+        }
+    );
+}
+
+
+// ==========================================
+// DELETE
+// ==========================================
+
+async function deleteInformation(id) {
+
+    const item = informationData.find(function (information) {
+        return String(information.id) === String(id);
+    });
+
+    if (!item) {
+        console.error("Data tidak ditemukan:", id);
+        return;
+    }
+
+    const confirmed = confirm(
+        `Hapus informasi "${item.title}"?`
+    );
+
+    if (!confirmed) return;
+
+    const { error } = await supabaseClient
+        .from("informasi")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+
+        console.error(
+            "Gagal menghapus informasi:",
+            error
+        );
+
+        alert("❌ Gagal menghapus informasi.");
+        return;
+    }
+
+    alert("✅ Informasi berhasil dihapus.");
+
+    await loadInformation();
+}
+
+
+// ==========================================
+// BUTTON EDIT & DELETE
+// ==========================================
+
+document.addEventListener("click", function (event) {
+
+    const editButton =
+        event.target.closest(".admin-edit-info");
+
+    if (editButton) {
+
+        const id =
+            editButton.getAttribute("data-id");
+
+        openEditInformation(id);
+
+        return;
+    }
+
+
+    const deleteButton =
+        event.target.closest(".admin-delete-info");
+
+    if (deleteButton) {
+
+        const id =
+            deleteButton.getAttribute("data-id");
+
+        deleteInformation(id);
+
+        return;
+    }
+
+});
+
+// ==========================================
+// SAVE EDIT
+// ==========================================
+
+if (saveEditInformation) {
+
+    saveEditInformation.addEventListener(
+        "click",
+        async function () {
+
+            const id =
+                editInfoId.value;
+
+            const category =
+                editInfoCategory.value;
+
+            const title =
+                editInfoTitle.value.trim();
+
+            const description =
+                editInfoDescription.value.trim();
+
+            const content =
+                editInfoContent.value.trim();
+
+            const date =
+                editInfoDate.value;
+
+            const icon =
+                editInfoIcon.value.trim() ||
+                "📢";
+
+
+            if (
+                !id ||
+                !title ||
+                !description ||
+                !content ||
+                !date
+            ) {
+
+                editInformationMessage.textContent =
+                    "⚠️ Lengkapi semua data terlebih dahulu.";
+
+                editInformationMessage.style.color =
+                    "#c0392b";
+
+                return;
+            }
+
+
+            saveEditInformation.disabled = true;
+
+            saveEditInformation.textContent =
+                "Menyimpan...";
+
+
+            const { error } =
+                await supabaseClient
+                    .from("informasi")
+                    .update({
+                        category: category,
+                        title: title,
+                        description: description,
+                        content: content,
+                        date: date,
+                        icon: icon
+                    })
+                    .eq("id", id);
+
+
+            if (error) {
+
+                console.error(
+                    "ERROR UPDATE:",
+                    error
+                );
+
+
+                editInformationMessage.textContent =
+                    "❌ Gagal menyimpan perubahan.";
+
+                editInformationMessage.style.color =
+                    "#c0392b";
+
+
+                saveEditInformation.disabled =
+                    false;
+
+                saveEditInformation.textContent =
+                    "💾 Simpan Perubahan";
+
+                return;
+            }
+
+
+            editInformationMessage.textContent =
+                "✅ Berhasil diperbarui.";
+
+            editInformationMessage.style.color =
+                "#087443";
+
+
+            setTimeout(function () {
+
+                closeEditInformation();
+
+                loadInformation();
+
+            }, 500);
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// DELETE
+// ==========================================
+
+async function deleteInformation(id) {
+
+    console.log("DELETE ID:", id);
+
+
+    const item =
+        informationData.find(
+            function (information) {
+
+                return String(information.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if (!item) {
+
+        console.error(
+            "Data tidak ditemukan:",
+            id
+        );
+
+        return;
+    }
+
+
+    const confirmed =
+        confirm(
+            `Yakin ingin menghapus "${item.title}"?`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    const { error } =
+        await supabaseClient
+            .from("informasi")
+            .delete()
+            .eq("id", id);
+
+
+    if (error) {
+
+        console.error(
+            "ERROR DELETE:",
+            error
+        );
+
+        alert(
+            "❌ Gagal menghapus informasi."
+        );
+
+        return;
+    }
+
+
+    alert(
+        "✅ Informasi berhasil dihapus."
+    );
+
+
+    await loadInformation();
+
+}
+    
