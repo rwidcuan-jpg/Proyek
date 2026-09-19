@@ -1376,6 +1376,35 @@
 
         <div class="admin-box">
 
+            <div class="admin-login" id="adminLogin">
+                <span class="section-badge">ADMINISTRATOR</span>
+
+                <h2>Login Admin</h2>
+
+                <p class="admin-description">
+                    Masuk untuk mengelola informasi Portal Kepegawaian.
+                </p>
+
+                <div class="admin-form">
+                    <label>
+                        Email Admin
+                        <input type="email" id="adminEmail" placeholder="Masukkan email admin" autocomplete="username">
+                    </label>
+
+                    <label>
+                        Password
+                        <input type="password" id="adminPassword" placeholder="Masukkan password"
+                            autocomplete="current-password">
+                    </label>
+
+                    <button class="admin-save" id="adminLoginButton">
+                        Masuk ke Admin
+                    </button>
+
+                    <p id="adminLoginError" class="admin-login-error"></p>
+                </div>
+            </div>
+
             <button class="admin-close" id="adminClose">×</button>
 
             <span class="section-badge">ADMIN PANEL</span>
@@ -1386,7 +1415,7 @@
                 Kelola informasi yang ditampilkan pada portal.
             </p>
 
-            <div class="admin-form">
+            <div class="admin-form" id="adminPanelContent">
 
                 <label>
                     Judul Pengumuman
@@ -1412,7 +1441,7 @@
 
             </div>
 
-            <div class="admin-preview">
+            <div class="admin-preview" id="adminPreview">
                 <strong>Preview</strong>
 
                 <div class="preview-status">
@@ -1423,11 +1452,193 @@
                 <p id="previewAnnouncement">
                     Belum ada pengumuman.
                 </p>
+
+                <button class="admin-logout" id="adminLogout">
+                    Keluar dari Admin
+                </button>
+
+                <div class="admin-info-manager">
+
+                    <div class="admin-manager-header">
+                        <span class="section-badge">KELOLA INFORMASI</span>
+                        <h3>Tambah Informasi Baru</h3>
+                        <p>
+                            Informasi yang ditambahkan akan tersimpan di database
+                            Supabase dan dapat ditampilkan pada halaman publik.
+                        </p>
+                    </div>
+
+                    <label>
+                        Kategori
+                        <select id="infoCategory">
+                            <option value="pengumuman">Pengumuman</option>
+                            <option value="jadwal">Jadwal</option>
+                            <option value="panduan">Panduan</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Judul
+                        <input type="text" id="infoTitle" placeholder="Contoh: Pengumuman Layanan Baru">
+                    </label>
+
+                    <label>
+                        Deskripsi Singkat
+                        <textarea id="infoDescription" placeholder="Tulis deskripsi singkat..." rows="3"></textarea>
+                    </label>
+
+                    <label>
+                        Isi Informasi
+                        <textarea id="infoContent" placeholder="Tulis isi informasi lengkap..." rows="6"></textarea>
+                    </label>
+
+                    <label>
+                        Tanggal
+                        <input type="date" id="infoDate">
+                    </label>
+
+                    <label>
+                        Ikon
+                        <input type="text" id="infoIcon" placeholder="Contoh: 📢" maxlength="5">
+                    </label>
+
+                    <button class="admin-save" id="addInformationButton">
+                        + Tambah Informasi
+                    </button>
+
+                    <p id="informationAdminMessage"></p>
+
+                </div>
+
+                <div class="admin-info-list">
+                    <div class="admin-manager-header">
+                        <span class="section-badge">DATA INFORMASI</span>
+                        <h3>Informasi yang Tersimpan</h3>
+                        <p>Kelola informasi yang sudah tersimpan di database.</p>
+                    </div>
+
+                    <div id="adminInformationList"></div>
+                </div>
             </div>
 
         </div>
 
     </div>
+
+
+
+    <!-- =========================
+     MODAL EDIT INFORMASI
+========================= -->
+
+    <div id="editInformationModal" class="edit-information-modal">
+
+        <div id="editInformationOverlay" class="edit-information-overlay">
+        </div>
+
+        <div class="edit-information-box">
+
+            <div class="edit-information-header">
+
+                <h3>Edit Informasi</h3>
+
+                <button type="button" id="editInformationClose" class="edit-information-close">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="edit-information-body">
+
+                <input type="hidden" id="editInfoId">
+
+                <div class="form-group">
+
+                    <label for="editInfoCategory">
+                        Kategori
+                    </label>
+
+                    <select id="editInfoCategory">
+                        <option value="pengumuman">Pengumuman</option>
+                        <option value="jadwal">Jadwal</option>
+                        <option value="panduan">Panduan</option>
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="editInfoTitle">
+                        Judul
+                    </label>
+
+                    <input type="text" id="editInfoTitle" placeholder="Judul informasi">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="editInfoDescription">
+                        Deskripsi Singkat
+                    </label>
+
+                    <textarea id="editInfoDescription" rows="3" placeholder="Deskripsi singkat">
+                </textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="editInfoContent">
+                        Isi Informasi
+                    </label>
+
+                    <textarea id="editInfoContent" rows="6" placeholder="Isi informasi">
+                </textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="editInfoDate">
+                        Tanggal
+                    </label>
+
+                    <input type="date" id="editInfoDate">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="editInfoIcon">
+                        Icon
+                    </label>
+
+                    <input type="text" id="editInfoIcon" placeholder="📢">
+
+                </div>
+
+                <p id="editInformationMessage"></p>
+
+            </div>
+
+            <div class="edit-information-footer">
+
+                <button type="button" id="editInformationCancel" class="edit-information-cancel">
+                    Batal
+                </button>
+
+                <button type="button" id="saveEditInformation" class="edit-information-save">
+                    Simpan Perubahan
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 
 </body>
