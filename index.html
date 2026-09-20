@@ -1519,12 +1519,199 @@
 
                     <div id="adminInformationList"></div>
                 </div>
+
+                <!-- =========================
+            DATA PEGAWAI
+            ========================= -->
+
+                <div class="admin-pegawai-list">
+
+                    <div class="admin-manager-header">
+
+                        <span class="section-badge">DATA PEGAWAI</span>
+
+                        <h3>Data Pegawai</h3>
+
+                        <p>
+                            Kelola data pegawai yang tersimpan di database.
+                        </p>
+
+                    </div>
+
+                    <button type="button" class="admin-save" id="addPegawaiButton">
+                        + Tambah Pegawai
+                    </button>
+
+                    <div class="admin-pegawai-search">
+
+                        <input type="text" id="pegawaiSearch" placeholder="🔍 Cari nama, NIP, jabatan...">
+
+                        <select id="pegawaiFilterStatus">
+
+                            <option value="all">
+                                Semua Status
+                            </option>
+
+                            <option value="Aktif">
+                                Aktif
+                            </option>
+
+                            <option value="Tidak Aktif">
+                                Tidak Aktif
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div id="adminPegawaiList">
+
+                        <p>
+                            Belum ada data pegawai.
+                        </p>
+
+                    </div>
+
+                    
+
+                </div>
             </div>
 
         </div>
 
     </div>
 
+        </div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     MODAL TAMBAH PEGAWAI
+========================================= -->
+
+<div class="pegawai-modal" id="pegawaiModal">
+
+    <div
+        class="pegawai-modal-overlay"
+        id="pegawaiModalOverlay">
+    </div>
+
+    <div class="pegawai-modal-box">
+
+        <button
+            type="button"
+            class="pegawai-modal-close"
+            id="pegawaiModalClose">
+            ×
+        </button>
+
+        <span class="section-badge">
+            DATA PEGAWAI
+        </span>
+
+        <h2>Tambah Pegawai</h2>
+
+        <p class="admin-description">
+            Masukkan data pegawai baru.
+        </p>
+
+        <div class="pegawai-form">
+
+            <label>
+                Nama Lengkap
+                <input
+                    type="text"
+                    id="pegawaiNama"
+                    placeholder="Contoh: Budi Santoso">
+            </label>
+
+            <label>
+                NIP
+                <input
+                    type="text"
+                    id="pegawaiNip"
+                    placeholder="Masukkan NIP">
+            </label>
+
+            <label>
+                Jabatan
+                <input
+                    type="text"
+                    id="pegawaiJabatan"
+                    placeholder="Contoh: Staff Administrasi">
+            </label>
+
+            <label>
+                Divisi
+                <input
+                    type="text"
+                    id="pegawaiDivisi"
+                    placeholder="Contoh: Kepegawaian">
+            </label>
+
+            <label>
+                Email
+                <input
+                    type="email"
+                    id="pegawaiEmail"
+                    placeholder="nama@email.com">
+            </label>
+
+            <label>
+                No. HP
+                <input
+                    type="text"
+                    id="pegawaiNoHp"
+                    placeholder="08xxxxxxxxxx">
+            </label>
+
+            <label>
+                Status
+                <select id="pegawaiStatus">
+
+                    <option value="Aktif">
+                        Aktif
+                    </option>
+
+                    <option value="Tidak Aktif">
+                        Tidak Aktif
+                    </option>
+
+                </select>
+            </label>
+
+            <p
+                id="pegawaiMessage"
+                class="pegawai-message">
+            </p>
+
+            <div class="pegawai-form-actions">
+
+                <button
+                    type="button"
+                    id="pegawaiCancelButton">
+                    Batal
+                </button>
+
+                <button
+                    type="button"
+                    class="admin-save"
+                    id="pegawaiSaveButton">
+                    💾 Simpan Pegawai
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    
 
 
     <!-- =========================
