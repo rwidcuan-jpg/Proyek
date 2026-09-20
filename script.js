@@ -1622,6 +1622,16 @@ if (editInformationOverlay) {
     );
 }
 
+const editInformationCancel =
+    document.getElementById("editInformationCancel");
+
+if (editInformationCancel) {
+    editInformationCancel.addEventListener(
+        "click",
+        closeEditInformation
+    );
+}
+
 
 // ==========================================
 // SAVE EDIT
@@ -1784,116 +1794,412 @@ document.addEventListener("click", function (event) {
 
 });
 
+
 // ==========================================
-// SAVE EDIT
+// DELETE
 // ==========================================
 
-if (saveEditInformation) {
+async function deleteInformation(id) {
 
-    saveEditInformation.addEventListener(
+    const item = informationData.find(function (information) {
+        return String(information.id) === String(id);
+    });
+
+    if (!item) {
+        console.error("Data tidak ditemukan:", id);
+        alert("❌ Data tidak ditemukan.");
+        return;
+    }
+
+    const confirmed = confirm(
+        `Yakin ingin menghapus "${item.title}"?`
+    );
+
+    if (!confirmed) return;
+
+    console.log("Mencoba menghapus ID:", id);
+
+    const { data, error } = await supabaseClient
+        .from("informasi")
+        .delete()
+        .eq("id", id)
+        .select();
+
+    if (error) {
+        console.error("Gagal menghapus:", error);
+
+        alert(
+            "❌ Data gagal dihapus.\n\n" +
+            "Error: " + error.message
+        );
+
+        return;
+    }
+
+    console.log("Data yang dihapus:", data);
+
+    if (!data || data.length === 0) {
+        alert(
+            "⚠️ Tidak ada data yang terhapus.\n\n" +
+            "Kemungkinan Supabase RLS/Policy belum mengizinkan DELETE."
+        );
+        return;
+    }
+
+    alert("✅ Informasi berhasil dihapus.");
+
+    await loadInformation();
+}
+
+// ==========================================
+// DATA PEGAWAI
+// ==========================================
+
+let pegawaiData = [];
+
+const pegawaiModal =
+    document.getElementById("pegawaiModal");
+
+const pegawaiModalOverlay =
+    document.getElementById("pegawaiModalOverlay");
+
+const pegawaiModalClose =
+    document.getElementById("pegawaiModalClose");
+
+const pegawaiCancelButton =
+    document.getElementById("pegawaiCancelButton");
+
+const addPegawaiButton =
+    document.getElementById("addPegawaiButton");
+
+const pegawaiSaveButton =
+    document.getElementById("pegawaiSaveButton");
+
+const pegawaiMessage =
+    document.getElementById("pegawaiMessage");
+
+const pegawaiNama =
+    document.getElementById("pegawaiNama");
+
+const pegawaiNip =
+    document.getElementById("pegawaiNip");
+
+const pegawaiJabatan =
+    document.getElementById("pegawaiJabatan");
+
+const pegawaiDivisi =
+    document.getElementById("pegawaiDivisi");
+
+const pegawaiEmail =
+    document.getElementById("pegawaiEmail");
+
+const pegawaiNoHp =
+    document.getElementById("pegawaiNoHp");
+
+const pegawaiStatus =
+    document.getElementById("pegawaiStatus");
+
+const adminPegawaiList =
+    document.getElementById("adminPegawaiList");
+
+
+// ==========================================
+// BUKA MODAL TAMBAH PEGAWAI
+// ==========================================
+
+if (addPegawaiButton) {
+
+    addPegawaiButton.addEventListener(
+        "click",
+        function () {
+
+            if (!pegawaiModal) return;
+
+            pegawaiMessage.textContent = "";
+
+            pegawaiModal.classList.add("show");
+
+            document.body.style.overflow = "hidden";
+        }
+    );
+
+}
+
+
+// ==========================================
+// TUTUP MODAL
+// ==========================================
+
+function closePegawaiModal() {
+
+    if (!pegawaiModal) return;
+
+    pegawaiModal.classList.remove("show");
+
+    document.body.style.overflow = "";
+}
+
+
+// Tombol X
+if (pegawaiModalClose) {
+
+    pegawaiModalClose.addEventListener(
+        "click",
+        closePegawaiModal
+    );
+
+}
+
+
+// Tombol Batal
+if (pegawaiCancelButton) {
+
+    pegawaiCancelButton.addEventListener(
+        "click",
+        closePegawaiModal
+    );
+
+}
+
+
+// Klik overlay
+if (pegawaiModalOverlay) {
+
+    pegawaiModalOverlay.addEventListener(
+        "click",
+        closePegawaiModal
+    );
+
+}
+
+
+// ==========================================
+// LOAD DATA PEGAWAI
+// ==========================================
+
+async function loadPegawai() {
+
+    const { data, error } =
+        await supabaseClient
+            .from("pegawai")
+            .select("*")
+            .order("created_at", {
+                ascending: false
+            });
+
+    if (error) {
+
+        console.error(
+            "Gagal mengambil data pegawai:",
+            error
+        );
+
+        return;
+    }
+
+    pegawaiData = data || [];
+
+    renderPegawai();
+}
+
+
+// ==========================================
+// TAMPILKAN DATA PEGAWAI
+// ==========================================
+
+function renderPegawai(data = pegawaiData) {
+
+    if (!adminPegawaiList) return;
+
+    if (data.length === 0) {
+
+        adminPegawaiList.innerHTML = `
+            <p>Data pegawai tidak ditemukan.</p>
+        `;
+
+        return;
+    }
+
+    adminPegawaiList.innerHTML = "";
+
+    data.forEach(function (pegawai) {
+
+        const item = document.createElement("div");
+
+        item.className = "admin-pegawai-item";
+
+        item.innerHTML = `
+
+            <div class="admin-pegawai-main">
+
+                <h4>
+                    👤 ${pegawai.nama}
+                </h4>
+
+                <p>
+                    ${pegawai.nip || "-"}
+                    • ${pegawai.jabatan || "-"}
+                    • ${pegawai.divisi || "-"}
+                </p>
+
+                <small>
+                    ${pegawai.email || "-"}
+                    • ${pegawai.no_hp || "-"}
+                </small>
+
+            </div>
+
+            <div class="pegawai-actions">
+
+                <span class="pegawai-status">
+                    ${pegawai.status || "Aktif"}
+                </span>
+
+                <button
+                    type="button"
+                    class="pegawai-edit-button"
+                    data-id="${pegawai.id}">
+                    ✏️ Edit
+                </button>
+
+                <button
+                    type="button"
+                    class="pegawai-delete-button"
+                    data-id="${pegawai.id}">
+                    🗑️ Hapus
+                </button>
+
+            </div>
+
+        `;
+
+        adminPegawaiList.appendChild(item);
+
+    });
+
+}
+
+// ==========================================
+// SIMPAN PEGAWAI
+// ==========================================
+
+if (pegawaiSaveButton) {
+
+    pegawaiSaveButton.addEventListener(
         "click",
         async function () {
 
-            const id =
-                editInfoId.value;
+            const nama =
+                pegawaiNama.value.trim();
 
-            const category =
-                editInfoCategory.value;
+            const nip =
+                pegawaiNip.value.trim();
 
-            const title =
-                editInfoTitle.value.trim();
+            const jabatan =
+                pegawaiJabatan.value.trim();
 
-            const description =
-                editInfoDescription.value.trim();
+            const divisi =
+                pegawaiDivisi.value.trim();
 
-            const content =
-                editInfoContent.value.trim();
+            const email =
+                pegawaiEmail.value.trim();
 
-            const date =
-                editInfoDate.value;
+            const no_hp =
+                pegawaiNoHp.value.trim();
 
-            const icon =
-                editInfoIcon.value.trim() ||
-                "📢";
+            const status =
+                pegawaiStatus.value;
 
 
-            if (
-                !id ||
-                !title ||
-                !description ||
-                !content ||
-                !date
-            ) {
+            // Validasi
+            if (!nama) {
 
-                editInformationMessage.textContent =
-                    "⚠️ Lengkapi semua data terlebih dahulu.";
+                pegawaiMessage.textContent =
+                    "⚠️ Nama pegawai wajib diisi.";
 
-                editInformationMessage.style.color =
+                pegawaiMessage.style.color =
                     "#c0392b";
 
                 return;
             }
 
 
-            saveEditInformation.disabled = true;
+            pegawaiSaveButton.disabled = true;
 
-            saveEditInformation.textContent =
+            pegawaiSaveButton.textContent =
                 "Menyimpan...";
 
 
             const { error } =
                 await supabaseClient
-                    .from("informasi")
-                    .update({
-                        category: category,
-                        title: title,
-                        description: description,
-                        content: content,
-                        date: date,
-                        icon: icon
-                    })
-                    .eq("id", id);
+                    .from("pegawai")
+                    .insert({
+
+                        nama: nama,
+                        nip: nip,
+                        jabatan: jabatan,
+                        divisi: divisi,
+                        email: email,
+                        no_hp: no_hp,
+                        status: status
+
+                    });
 
 
             if (error) {
 
                 console.error(
-                    "ERROR UPDATE:",
+                    "Gagal menambahkan pegawai:",
                     error
                 );
 
+                pegawaiMessage.textContent =
+                    "❌ Gagal menyimpan data pegawai.";
 
-                editInformationMessage.textContent =
-                    "❌ Gagal menyimpan perubahan.";
-
-                editInformationMessage.style.color =
+                pegawaiMessage.style.color =
                     "#c0392b";
 
+                pegawaiSaveButton.disabled = false;
 
-                saveEditInformation.disabled =
-                    false;
-
-                saveEditInformation.textContent =
-                    "💾 Simpan Perubahan";
+                pegawaiSaveButton.textContent =
+                    "💾 Simpan Pegawai";
 
                 return;
             }
 
 
-            editInformationMessage.textContent =
-                "✅ Berhasil diperbarui.";
+            // Berhasil
+            pegawaiMessage.textContent =
+                "✅ Pegawai berhasil ditambahkan!";
 
-            editInformationMessage.style.color =
+            pegawaiMessage.style.color =
                 "#087443";
+
+
+            // Kosongkan form
+            pegawaiNama.value = "";
+            pegawaiNip.value = "";
+            pegawaiJabatan.value = "";
+            pegawaiDivisi.value = "";
+            pegawaiEmail.value = "";
+            pegawaiNoHp.value = "";
+            pegawaiStatus.value = "Aktif";
+
+
+            await loadPegawai();
+
+
+            pegawaiSaveButton.disabled = false;
+
+            pegawaiSaveButton.textContent =
+                "💾 Simpan Pegawai";
 
 
             setTimeout(function () {
 
-                closeEditInformation();
+                closePegawaiModal();
 
-                loadInformation();
-
-            }, 500);
+            }, 700);
 
         }
     );
@@ -1902,75 +2208,69 @@ if (saveEditInformation) {
 
 
 // ==========================================
-// DELETE
+// LOAD SAAT WEBSITE DIBUKA
 // ==========================================
 
-async function deleteInformation(id) {
+loadPegawai();
 
-    console.log("DELETE ID:", id);
+// ==========================================
+// SEARCH & FILTER DATA PEGAWAI
+// ==========================================
 
+const pegawaiSearch =
+    document.getElementById("pegawaiSearch");
 
-    const item =
-        informationData.find(
-            function (information) {
-
-                return String(information.id) ===
-                    String(id);
-
-            }
-        );
+const pegawaiFilterStatus =
+    document.getElementById("pegawaiFilterStatus");
 
 
-    if (!item) {
+function filterPegawai() {
 
-        console.error(
-            "Data tidak ditemukan:",
-            id
-        );
+    const keyword = pegawaiSearch.value
+        .toLowerCase()
+        .trim();
 
-        return;
-    }
+    const statusFilter = pegawaiFilterStatus.value;
 
+    const hasil = pegawaiData.filter(function (pegawai) {
 
-    const confirmed =
-        confirm(
-            `Yakin ingin menghapus "${item.title}"?`
-        );
+        const dataSearch = (
+            (pegawai.nama || "") + " " +
+            (pegawai.nip || "") + " " +
+            (pegawai.jabatan || "") + " " +
+            (pegawai.divisi || "") + " " +
+            (pegawai.email || "") + " " +
+            (pegawai.no_hp || "")
+        ).toLowerCase();
 
+        const cocokNama =
+            dataSearch.includes(keyword);
 
-    if (!confirmed) {
-        return;
-    }
+        const cocokStatus =
+            statusFilter === "all" ||
+            pegawai.status === statusFilter;
 
+        return cocokNama && cocokStatus;
 
-    const { error } =
-        await supabaseClient
-            .from("informasi")
-            .delete()
-            .eq("id", id);
+    });
 
+    renderPegawai(hasil);
+}
 
-    if (error) {
+if (pegawaiSearch) {
 
-        console.error(
-            "ERROR DELETE:",
-            error
-        );
-
-        alert(
-            "❌ Gagal menghapus informasi."
-        );
-
-        return;
-    }
-
-
-    alert(
-        "✅ Informasi berhasil dihapus."
+    pegawaiSearch.addEventListener(
+        "input",
+        filterPegawai
     );
 
+}
 
-    await loadInformation();
+if (pegawaiFilterStatus) {
+
+    pegawaiFilterStatus.addEventListener(
+        "change",
+        filterPegawai
+    );
 
 }
-    
