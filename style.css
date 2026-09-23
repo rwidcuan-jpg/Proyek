@@ -6452,3 +6452,404 @@ main p {
 .pegawai-message {
     min-height: 20px;
 }
+
+/* ==========================================
+   DATA PEGAWAI - MODERN UI
+========================================== */
+
+.admin-pegawai-list {
+    margin-top: 25px;
+}
+
+/* Search area */
+
+.admin-pegawai-search {
+    display: flex;
+    gap: 12px;
+    margin: 18px 0;
+    flex-wrap: wrap;
+}
+
+.admin-pegawai-search input {
+    flex: 1;
+    min-width: 250px;
+    padding: 13px 16px;
+
+    border: 1px solid #d9e2df;
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: #173f35;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.admin-pegawai-search input:focus {
+    border-color: #087443;
+    box-shadow: 0 0 0 3px rgba(8, 116, 67, 0.10);
+}
+
+.admin-pegawai-search select {
+    padding: 13px 16px;
+
+    border: 1px solid #d9e2df;
+    border-radius: 12px;
+
+    background: white;
+    color: #173f35;
+
+    font-size: 14px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+/* Card pegawai */
+
+.admin-pegawai-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 14px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5ece9;
+
+    border-radius: 16px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+
+    transition: 0.25s ease;
+}
+
+.admin-pegawai-item:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+    border-color: #cfe5dc;
+}
+
+/* Informasi utama */
+
+.admin-pegawai-main {
+    min-width: 0;
+}
+
+.admin-pegawai-main h4 {
+    margin: 0 0 8px;
+
+    font-size: 18px;
+
+    color: #123f34;
+}
+
+.admin-pegawai-main p {
+    margin: 0 0 6px;
+
+    color: #4f6b63;
+
+    font-size: 14px;
+}
+
+.admin-pegawai-main small {
+    color: #82938e;
+
+    font-size: 13px;
+}
+
+/* Area kanan */
+
+.pegawai-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+/* Status */
+
+.pegawai-status {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: #e8f7ef;
+
+    color: #087443;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Tombol Edit */
+
+.pegawai-edit-button {
+    border: none;
+
+    padding: 8px 13px;
+
+    border-radius: 9px;
+
+    background: #eef5ff;
+
+    color: #2463a5;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.pegawai-edit-button:hover {
+    background: #dceaff;
+    transform: translateY(-1px);
+}
+
+/* Tombol Hapus */
+
+.pegawai-delete-button {
+    border: none;
+
+    padding: 8px 13px;
+
+    border-radius: 9px;
+
+    background: #fff0f0;
+
+    color: #c0392b;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.pegawai-delete-button:hover {
+    background: #ffe0e0;
+    transform: translateY(-1px);
+}
+
+/* Responsive HP */
+
+@media (max-width: 700px) {
+
+    .admin-pegawai-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .pegawai-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .pegawai-status {
+        margin-right: auto;
+    }
+
+}
+
+/* ==========================================
+   STATISTIK PEGAWAI
+========================================== */
+
+.pegawai-statistics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.pegawai-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5ece9;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+.pegawai-stat-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eef8f3;
+    border-radius: 12px;
+
+    font-size: 22px;
+}
+
+.pegawai-stat-card small {
+    display: block;
+
+    color: #71847d;
+
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.pegawai-stat-card strong {
+    display: block;
+
+    color: #123f34;
+
+    font-size: 24px;
+}
+
+@media (max-width: 700px) {
+
+    .pegawai-statistics {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* ==========================================
+   DETAIL PEGAWAI
+========================================== */
+
+.detail-pegawai-box {
+    max-width: 650px;
+}
+
+.detail-pegawai-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin: 25px 0;
+    padding: 20px;
+
+    background: #f4f9f7;
+    border-radius: 16px;
+}
+
+.detail-pegawai-avatar {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #087443;
+    color: white;
+
+    font-size: 27px;
+}
+
+.detail-pegawai-header h2 {
+    margin: 0 0 8px;
+    color: #123f34;
+}
+
+.detail-pegawai-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.detail-pegawai-data > div {
+    padding: 15px;
+
+    border: 1px solid #e5ece9;
+    border-radius: 12px;
+
+    background: #fff;
+}
+
+.detail-pegawai-data small {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #7b8c86;
+    font-size: 12px;
+}
+
+.detail-pegawai-data strong {
+    display: block;
+
+    color: #173f35;
+    font-size: 14px;
+
+    word-break: break-word;
+}
+
+.pegawai-detail-button {
+    border: none;
+
+    padding: 8px 13px;
+
+    border-radius: 9px;
+
+    background: #eef8f3;
+    color: #087443;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.pegawai-detail-button:hover {
+    background: #dcefe6;
+}
+
+@media (max-width: 600px) {
+
+    .detail-pegawai-data {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.detail-pegawai-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #087443;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.detail-pegawai-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
