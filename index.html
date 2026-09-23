@@ -1540,7 +1540,37 @@
 
                     <button type="button" class="admin-save" id="addPegawaiButton">
                         + Tambah Pegawai
-                    </button>
+                    </button><!-- STATISTIK PEGAWAI -->
+
+                    <div class="pegawai-statistics">
+
+                        <div class="pegawai-stat-card">
+                            <span class="pegawai-stat-icon">👥</span>
+                            <div>
+                                <small>Total Pegawai</small>
+                                <strong id="totalPegawai">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="pegawai-stat-card">
+                            <span class="pegawai-stat-icon">🟢</span>
+                            <div>
+                                <small>Pegawai Aktif</small>
+                                <strong id="pegawaiAktif">0</strong>
+                            </div>
+                        </div>
+
+                        <div class="pegawai-stat-card">
+                            <span class="pegawai-stat-icon">⚪</span>
+                            <div>
+                                <small>Tidak Aktif</small>
+                                <strong id="pegawaiTidakAktif">0</strong>
+                            </div>
+                        </div>
+
+                    </div>
+
+
 
                     <div class="admin-pegawai-search">
 
@@ -1572,7 +1602,7 @@
 
                     </div>
 
-                    
+
 
                 </div>
             </div>
@@ -1581,127 +1611,110 @@
 
     </div>
 
-        </div>
+    </div>
 
-</div>
+    </div>
 
-</div>
+    </div>
 
 
-<!-- =========================================
+    <!-- =========================================
      MODAL TAMBAH PEGAWAI
 ========================================= -->
 
-<div class="pegawai-modal" id="pegawaiModal">
+    <div class="pegawai-modal" id="pegawaiModal">
 
-    <div
-        class="pegawai-modal-overlay"
-        id="pegawaiModalOverlay">
-    </div>
+        <div class="pegawai-modal-overlay" id="pegawaiModalOverlay">
+        </div>
 
-    <div class="pegawai-modal-box">
+        <div class="pegawai-modal-box">
 
-        <button
-            type="button"
-            class="pegawai-modal-close"
-            id="pegawaiModalClose">
-            ×
-        </button>
+            <button type="button" class="pegawai-modal-close" id="pegawaiModalClose">
+                ×
+            </button>
 
-        <span class="section-badge">
-            DATA PEGAWAI
-        </span>
+            <span class="section-badge">
+                DATA PEGAWAI
+            </span>
 
-        <h2>Tambah Pegawai</h2>
+            <h2>Tambah Pegawai</h2>
 
-        <p class="admin-description">
-            Masukkan data pegawai baru.
-        </p>
-
-        <div class="pegawai-form">
-
-            <label>
-                Nama Lengkap
-                <input
-                    type="text"
-                    id="pegawaiNama"
-                    placeholder="Contoh: Budi Santoso">
-            </label>
-
-            <label>
-                NIP
-                <input
-                    type="text"
-                    id="pegawaiNip"
-                    placeholder="Masukkan NIP">
-            </label>
-
-            <label>
-                Jabatan
-                <input
-                    type="text"
-                    id="pegawaiJabatan"
-                    placeholder="Contoh: Staff Administrasi">
-            </label>
-
-            <label>
-                Divisi
-                <input
-                    type="text"
-                    id="pegawaiDivisi"
-                    placeholder="Contoh: Kepegawaian">
-            </label>
-
-            <label>
-                Email
-                <input
-                    type="email"
-                    id="pegawaiEmail"
-                    placeholder="nama@email.com">
-            </label>
-
-            <label>
-                No. HP
-                <input
-                    type="text"
-                    id="pegawaiNoHp"
-                    placeholder="08xxxxxxxxxx">
-            </label>
-
-            <label>
-                Status
-                <select id="pegawaiStatus">
-
-                    <option value="Aktif">
-                        Aktif
-                    </option>
-
-                    <option value="Tidak Aktif">
-                        Tidak Aktif
-                    </option>
-
-                </select>
-            </label>
-
-            <p
-                id="pegawaiMessage"
-                class="pegawai-message">
+            <p class="admin-description">
+                Masukkan data pegawai baru.
             </p>
 
-            <div class="pegawai-form-actions">
+            <div class="pegawai-form">
 
-                <button
-                    type="button"
-                    id="pegawaiCancelButton">
-                    Batal
-                </button>
+                <label>
+                    Nama Lengkap
+                    <input type="text" id="pegawaiNama" placeholder="Contoh: Budi Santoso">
+                </label>
 
-                <button
-                    type="button"
-                    class="admin-save"
-                    id="pegawaiSaveButton">
-                    💾 Simpan Pegawai
-                </button>
+                <label>
+                    NIP
+                    <input type="text" id="pegawaiNip" placeholder="Masukkan NIP">
+                </label>
+
+                <label>
+                    Jabatan
+                    <input type="text" id="pegawaiJabatan" placeholder="Contoh: Staff Administrasi">
+                </label>
+
+                <label>
+                    Divisi
+                    <input type="text" id="pegawaiDivisi" placeholder="Contoh: Kepegawaian">
+                </label>
+
+                <label>
+                    Email
+                    <input type="email" id="pegawaiEmail" placeholder="nama@email.com">
+                </label>
+
+                <label>
+                    No. HP
+                    <input type="text" id="pegawaiNoHp" placeholder="08xxxxxxxxxx">
+                </label>
+
+                <label>
+                    Foto Pegawai
+                    <input type="file" id="pegawaiFoto" accept="image/*">
+                </label>
+
+                <div id="pegawaiFotoPreview" class="pegawai-foto-preview">
+                    <span>Belum ada foto</span>
+                </div>
+
+
+
+                <label>
+                    Status
+                    <select id="pegawaiStatus">
+
+                        <option value="Aktif">
+                            Aktif
+                        </option>
+
+                        <option value="Tidak Aktif">
+                            Tidak Aktif
+                        </option>
+
+                    </select>
+                </label>
+
+                <p id="pegawaiMessage" class="pegawai-message">
+                </p>
+
+                <div class="pegawai-form-actions">
+
+                    <button type="button" id="pegawaiCancelButton">
+                        Batal
+                    </button>
+
+                    <button type="button" class="admin-save" id="pegawaiSaveButton">
+                        💾 Simpan Pegawai
+                    </button>
+
+                </div>
 
             </div>
 
@@ -1709,9 +1722,175 @@
 
     </div>
 
-</div>
+    <!-- =========================
+MODAL EDIT PEGAWAI
+========================= -->
 
-    
+    <div class="pegawai-modal" id="editPegawaiModal">
+
+        <div class="pegawai-modal-overlay" id="editPegawaiModalOverlay">
+        </div>
+
+        <div class="pegawai-modal-box">
+
+            <button type="button" class="pegawai-modal-close" id="editPegawaiModalClose">
+                ×
+            </button>
+
+            <span class="section-badge">
+                DATA PEGAWAI
+            </span>
+
+            <h2>Edit Pegawai</h2>
+
+            <p class="admin-description">
+                Ubah data pegawai.
+            </p>
+
+            <div class="pegawai-form">
+
+                <label>
+                    Nama Lengkap
+                    <input type="text" id="editPegawaiNama">
+                </label>
+
+                <label>
+                    NIP
+                    <input type="text" id="editPegawaiNip">
+                </label>
+
+                <label>
+                    Jabatan
+                    <input type="text" id="editPegawaiJabatan">
+                </label>
+
+                <label>
+                    Divisi
+                    <input type="text" id="editPegawaiDivisi">
+                </label>
+
+                <label>
+                    Email
+                    <input type="email" id="editPegawaiEmail">
+                </label>
+
+                <label>
+                    No. HP
+                    <input type="text" id="editPegawaiNoHp">
+                </label>
+
+                <label>
+                    Foto Pegawai
+                    <input type="file" id="editPegawaiFoto" accept="image/*">
+                </label>
+
+                <div id="editPegawaiFotoPreview" class="pegawai-foto-preview">
+                    <span>Belum ada foto</span>
+                </div>
+
+                <label>
+                    Status
+                    <select id="editPegawaiStatus">
+                        <option value="Aktif">
+                            Aktif
+                        </option>
+
+                        <option value="Tidak Aktif">
+                            Tidak Aktif
+                        </option>
+                    </select>
+                </label>
+
+                <p id="editPegawaiMessage" class="pegawai-message">
+                </p>
+
+                <div class="pegawai-form-actions">
+
+                    <button type="button" id="editPegawaiCancelButton">
+                        Batal
+                    </button>
+
+                    <button type="button" class="admin-save" id="editPegawaiSaveButton">
+                        💾 Simpan Perubahan
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+MODAL DETAIL PEGAWAI
+========================================== -->
+
+    <div class="pegawai-modal" id="detailPegawaiModal">
+
+        <div class="pegawai-modal-overlay" id="detailPegawaiModalOverlay">
+        </div>
+
+        <div class="pegawai-modal-box detail-pegawai-box">
+
+            <button type="button" class="pegawai-modal-close" id="detailPegawaiModalClose">
+                ×
+            </button>
+
+            <span class="section-badge">
+                DETAIL PEGAWAI
+            </span>
+
+            <div class="detail-pegawai-header">
+
+                <div class="detail-pegawai-avatar">
+                    <img id="detailPegawaiFoto" src="" alt="Foto Pegawai">
+                </div>
+
+                <div>
+                    <h2 id="detailPegawaiNama">-</h2>
+
+                    <span id="detailPegawaiStatus" class="pegawai-status">
+                        Aktif
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="detail-pegawai-data">
+
+                <div>
+                    <small>NIP</small>
+                    <strong id="detailPegawaiNip">-</strong>
+                </div>
+
+                <div>
+                    <small>Jabatan</small>
+                    <strong id="detailPegawaiJabatan">-</strong>
+                </div>
+
+                <div>
+                    <small>Divisi</small>
+                    <strong id="detailPegawaiDivisi">-</strong>
+                </div>
+
+                <div>
+                    <small>Email</small>
+                    <strong id="detailPegawaiEmail">-</strong>
+                </div>
+
+                <div>
+                    <small>No. HP</small>
+                    <strong id="detailPegawaiNoHp">-</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
 
 
     <!-- =========================
